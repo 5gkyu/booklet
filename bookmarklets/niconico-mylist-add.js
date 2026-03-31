@@ -69,29 +69,53 @@ javascript:void((async function(){
     var id   = item.id;
     var memo = item.memo || '';
     try {
-      // memo が空でなければ &memo= を付加（ニコニコのマイリストメモ機能）
-      var url = 'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
+      // Step1: アイテムを追加（memo は JSON ボディで description として送信）
+      var addUrl = 'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
         + encodeURIComponent(mylistId)
         + '/items?itemId='
-        + encodeURIComponent(id)
-        + (memo ? '&memo=' + encodeURIComponent(memo) : '');
-      var res = await fetch(
-        url,
-        {
-          method: 'POST',
-          credentials: 'include',
-          mode: 'cors',
-          headers: {
-            'accept': '*/*',
-            'x-request-with': 'nicovideo',
-            'x-frontend-id': '3',
-            'x-client-os-type': 'ios'
-          }
+        + encodeURIComponent(id);
+      var fetchOpts = {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          'accept': '*/*',
+          'x-request-with': 'nicovideo',
+          'x-frontend-id': '3',
+          'x-client-os-type': 'ios'
         }
-      );
+      };
+      if (memo) {
+        fetchOpts.headers['content-type'] = 'application/json';
+        fetchOpts.body = JSON.stringify({ description: memo });
+      }
+      var res = await fetch(addUrl, fetchOpts);
 
       if (res && res.ok) {
         success++;
+        // Step2: POST でメモが設定できない場合のフォールバック — PATCH で description を更新
+        if (memo) {
+          try {
+            await fetch(
+              'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
+                + encodeURIComponent(mylistId)
+                + '/items/' + encodeURIComponent(id),
+              {
+                method: 'PATCH',
+                credentials: 'include',
+                mode: 'cors',
+                headers: {
+                  'accept': '*/*',
+                  'content-type': 'application/json',
+                  'x-request-with': 'nicovideo',
+                  'x-frontend-id': '3',
+                  'x-client-os-type': 'ios'
+                },
+                body: JSON.stringify({ description: memo })
+              }
+            );
+          } catch(e2) { /* PATCH 失敗は無視 */ }
+        }
       } else if (res && res.status === 409) {
         // すでにマイリスト登録済み → スキップ
         skip++;
