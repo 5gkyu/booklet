@@ -14,8 +14,11 @@
 // レート制限対策:
 //   - 1件ごとに 500ms 待機（nvapi の非公式制限を考慮）
 //   - 409 Conflict（重複）は失敗にカウントせずスキップ扱いにする
-//
+
+
 javascript:void((async function(){
+
+  try {
 
   // ── マイリストIDを URL から取得 ──
   var m = (location.pathname || '').match(/\/mylist\/(\d+)/);
@@ -30,11 +33,11 @@ javascript:void((async function(){
     '①で取得したIDリストを貼り付けてください:\n'
     + '（① 実行後にクリップボードへコピー済みのJSON）'
   );
-  if (!raw) { alert('キャンセルしました。'); return; }
+  if (!raw) { return; }
 
   var ids;
   try { ids = JSON.parse(raw); } catch(e) {
-    alert('形式が正しくありません。\n①を再実行してコピーし直してください。');
+    alert('形式エラー。①を再実行してください。');
     return;
   }
 
@@ -43,19 +46,11 @@ javascript:void((async function(){
     return;
   }
 
-  // ── マイリストIDを URL から取得 ──
-  var m = (location.pathname || '').match(/\/mylist\/(\d+)/);
-  if (!m) {
-    alert('ニコニコのマイリストページで実行してください。\n例: https://www.nicovideo.jp/my/mylist/123456');
-    return;
-  }
-  var mylistId = m[1];
-
   // ── 確認ダイアログ ──
   var ok = confirm(
-    ids.length + ' 件をマイリスト(ID: ' + mylistId + ')に追加します。\n\n'
-    + '500ms 間隔で順番に登録します（レート制限対策）。\n'
-    + '完了まで約 ' + Math.ceil(ids.length * 0.5) + ' 秒かかります。\n\n'
+    ids.length + ' 件をマイリスト(ID: ' + mylistId + ')に追加します。\n'
+    + '500ms 間隔で登録（レート制限対策）。\n'
+    + '完了まで約 ' + Math.ceil(ids.length * 0.5) + ' 秒\n'
     + 'よろしいですか？'
   );
   if (!ok) return;
@@ -108,5 +103,7 @@ javascript:void((async function(){
     + '❌ 失敗:         ' + fail    + ' 件\n\n'
     + 'ページを更新して確認してください。'
   );
+
+  } catch(e) { alert('エラー: ' + e); }
 
 })())
