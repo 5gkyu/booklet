@@ -56,8 +56,8 @@ javascript:void((async function(){
   // ── 確認ダイアログ ──
   var ok = confirm(
     items.length + ' 件をマイリスト(ID: ' + mylistId + ')に追加します。\n'
-    + '500ms 間隔で登録（レート制限対策）。\n'
-    + '完了まで約 ' + Math.ceil(items.length * 0.5) + ' 秒\n'
+    + '1000ms 間隔で登録（レート制限対策）。\n'
+    + '完了まで約 ' + Math.ceil(items.length * 1.0) + ' 秒\n'
     + 'よろしいですか？'
   );
   if (!ok) return;
@@ -69,53 +69,26 @@ javascript:void((async function(){
     var id   = item.id;
     var memo = item.memo || '';
     try {
-      // Step1: アイテムを追加（memo は JSON ボディで description として送信）
-      var addUrl = 'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
+      // description はクエリパラメータで付与（実績のある形式）
+      var d = memo ? encodeURI(memo) : '';
+      var url = 'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
         + encodeURIComponent(mylistId)
         + '/items?itemId='
-        + encodeURIComponent(id);
-      var fetchOpts = {
+        + encodeURIComponent(id)
+        + (d ? '&description=' + d : '');
+      var res = await fetch(url, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         headers: {
-          'accept': '*/*',
-          'x-request-with': 'nicovideo',
-          'x-frontend-id': '3',
-          'x-client-os-type': 'ios'
+          'X-Frontend-Id': '6',
+          'X-Frontend-Version': '0',
+          'X-Request-With': location.origin
         }
-      };
-      if (memo) {
-        fetchOpts.headers['content-type'] = 'application/json';
-        fetchOpts.body = JSON.stringify({ description: memo });
-      }
-      var res = await fetch(addUrl, fetchOpts);
+      });
 
       if (res && res.ok) {
         success++;
-        // Step2: POST でメモが設定できない場合のフォールバック — PATCH で description を更新
-        if (memo) {
-          try {
-            await fetch(
-              'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
-                + encodeURIComponent(mylistId)
-                + '/items/' + encodeURIComponent(id),
-              {
-                method: 'PATCH',
-                credentials: 'include',
-                mode: 'cors',
-                headers: {
-                  'accept': '*/*',
-                  'content-type': 'application/json',
-                  'x-request-with': 'nicovideo',
-                  'x-frontend-id': '3',
-                  'x-client-os-type': 'ios'
-                },
-                body: JSON.stringify({ description: memo })
-              }
-            );
-          } catch(e2) { /* PATCH 失敗は無視 */ }
-        }
       } else if (res && res.status === 409) {
         // すでにマイリスト登録済み → スキップ
         skip++;
@@ -128,9 +101,9 @@ javascript:void((async function(){
       if (!firstErr) firstErr = String(e) + ' (' + id + ')';
     }
 
-    // レート制限対策: 最後の1件以外は 500ms 待機
+    // レート制限対策: 最後の1件以外は 1000ms 待機
     if (i < items.length - 1) {
-      await new Promise(function(r) { setTimeout(r, 500); });
+      await new Promise(function(r) { setTimeout(r, 1000); });
     }
   }
 
