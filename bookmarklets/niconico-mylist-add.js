@@ -1,12 +1,15 @@
 // ② ニコニコ マイリスト追加
 // ニコニコ動画のマイリストページで実行する。
-// Kiiteの抽出ブックマークレット（①）が localStorage["kiite_ids"] に
-// 保存した動画IDを順番にマイリストへ登録する。
+// ①「Kiite 動画IDを抽出」がクリップボードにコピーしたJSONを
+// prompt に貼り付けて動画IDを受け取り、マイリストへ登録する。
+//
+// ※ localStorage はドメイン別のため kiite.jp → nicovideo.jp 間では共有できない。
+//   そのため①のクリップボードコピー経由で渡す。
 //
 // 前提:
 //   - ログイン済みのニコニコアカウントでアクセスしていること
 //   - URL が /my/mylist/{id} または /mylist/{id} の形式であること
-//   - 先に「① Kiite 動画IDを抽出」ブックマークレットを実行済みであること
+//   - 先に「① Kiite 動画IDを抽出」を実行してクリップボードにコピー済みであること
 //
 // レート制限対策:
 //   - 1件ごとに 500ms 待機（nvapi の非公式制限を考慮）
@@ -14,18 +17,24 @@
 //
 javascript:void((async function(){
 
-  // ── localStorage からIDリストを取得 ──
-  var raw;
-  try { raw = localStorage.getItem('kiite_ids'); } catch(e) {}
-
-  if (!raw) {
-    alert('動画IDが見つかりません。\n先に Kiite のページで\n「① Kiite 動画IDを抽出」を実行してください。');
+  // ── マイリストIDを URL から取得 ──
+  var m = (location.pathname || '').match(/\/mylist\/(\d+)/);
+  if (!m) {
+    alert('ニコニコのマイリストページで実行してください。\n例: https://www.nicovideo.jp/my/mylist/123456');
     return;
   }
+  var mylistId = m[1];
+
+  // ── prompt でIDリストを受け取る（クリップボードから貼り付け） ──
+  var raw = prompt(
+    '①で取得したIDリストを貼り付けてください:\n'
+    + '（① 実行後にクリップボードへコピー済みのJSON）'
+  );
+  if (!raw) { alert('キャンセルしました。'); return; }
 
   var ids;
   try { ids = JSON.parse(raw); } catch(e) {
-    alert('IDデータが壊れています。\nKiite ページで再度抽出してください。');
+    alert('形式が正しくありません。\n①を再実行してコピーし直してください。');
     return;
   }
 
