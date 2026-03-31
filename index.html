@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmarklet Collection</title>
+  <style>
+    :root {
+      --pink:       #f0446e;
+      --pink-light: #ffe0eb;
+      --pink-pale:  #fff5f8;
+      --pink-tag:   #ffd0de;
+      --pink-dark:  #c4234f;
+      --green:      #27ae60;
+      --text:       #2a1a1f;
+      --text-muted: #9e7a86;
+      --card-bg:    #ffffff;
+      --shadow:     0 2px 10px rgba(240,68,110,.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", sans-serif;
+      background: var(--pink-pale);
+      color: var(--text);
+      min-height: 100dvh;
+      padding-bottom: 80px;
+    }
+
+    /* ── 検索バー ── */
+    .search-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 1px solid var(--pink-light);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(240,68,110,.07);
+    }
+    .search-bar .search-icon {
+      color: var(--pink);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: .95rem;
+      color: var(--text);
+      background: transparent;
+      caret-color: var(--pink);
+    }
+    .search-bar input::placeholder { color: var(--text-muted); }
+    #searchClear {
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0 2px;
+      display: none;
+    }
+    #searchClear.visible { display: block; }
+
+    /* ── タグフィルター ── */
+    .tag-filter {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tag-filter::-webkit-scrollbar { display: none; }
+    .tag-pill {
+      flex-shrink: 0;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--pink-light);
+      background: #fff;
+      color: var(--text-muted);
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tag-pill.active {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: #fff;
+    }
+
+    /* ── 件数表示 ── */
+    .result-count {
+      padding: 0 16px 6px;
+      font-size: .78rem;
+      color: var(--text-muted);
+    }
+    .result-count span {
+      color: var(--pink);
+      font-weight: 700;
+    }
+
+    /* ── カードリスト ── */
+    .card-list {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--pink-light);
+      transition: transform .15s;
+    }
+    .card:active { transform: scale(.98); }
+    .card[hidden] { display: none !important; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .card-title-area { flex: 1; }
+
+    .card-tag {
+      display: inline-block;
+      background: var(--pink-tag);
+      color: var(--pink-dark);
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      letter-spacing: .02em;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: .83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .btn-copy {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      border: 1.5px solid #f4a0b8;
+      border-radius: 10px;
+      background: #fcc8d8;
+      color: var(--pink-dark);
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s, opacity .2s;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: .02em;
+    }
+    .btn-copy:active { opacity: .8; }
+    .btn-copy.copied {
+      background: #e6f9ee;
+      border-color: #a8e6c1;
+      color: #1a7a45;
+    }
+
+    /* ── 空状態 ── */
+    .empty {
+      text-align: center;
+      padding: 48px 16px;
+      color: var(--text-muted);
+      display: none;
+    }
+    .empty.show { display: block; }
+    .empty .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
+    .empty p { font-size: .9rem; }
+
+    /* ── 使い方アコーディオン ── */
+    .how-to {
+      padding: 0 16px 14px;
+    }
+    .how-to details {
+      background: #fff;
+      border-radius: 12px;
+      padding: 13px 16px;
+      border: 1px solid var(--pink-light);
+    }
+    .how-to summary {
+      font-weight: 700;
+      font-size: .88rem;
+      cursor: pointer;
+      list-style: none;
+      color: var(--pink);
+    }
+    .how-to summary::marker, .how-to summary::-webkit-details-marker { display: none; }
+    .how-to summary::before { content: "📖 "; }
+    .how-to ol {
+      margin-top: 10px;
+      padding-left: 1.3em;
+      font-size: .82rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+    .how-to ol li strong { color: var(--pink); }
+
+    /* ── ガイドボタン ── */
+    .guide-btn-wrap {
+      padding: 0 16px 14px;
+    }
+    .btn-guide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 11px;
+      border: 1.5px solid var(--pink-light);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--pink);
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .15s;
+    }
+    .btn-guide:active { background: var(--pink-pale); }
+
+    /* ── モーダルオーバーレイ ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42,26,31,.45);
+      z-index: 300;
+      display: flex;
+      align-items: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-height: 90dvh;
+      overflow-y: auto;
+      padding: 24px 20px 40px;
+      translate: 0 100%;
+      transition: translate .3s cubic-bezier(.4,0,.2,1);
+    }
+    .modal-overlay.open .modal { translate: 0 0; }
+
+    .modal-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--pink-light);
+      border-radius: 4px;
+      margin: 0 auto 20px;
+    }
+    .modal h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    /* ── ステップカード ── */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--pink-pale);
+      border-radius: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--pink-light);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--pink);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+    .step-body strong {
+      display: block;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .step-body span {
+      font-size: .8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .step-body .step-icon {
+      font-size: 1rem;
+      margin-right: 4px;
+    }
+
+    .modal-close {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: var(--pink);
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .modal-close:active { opacity: .8; }
+
+    /* ── トースト ── */
+    .toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      translate: -50% 0;
+      background: var(--text);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: .82rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity .25s;
+      pointer-events: none;
+      z-index: 200;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- 検索バー -->
+<div class="search-bar">
+  <span class="search-icon">🔍</span>
+  <input type="search" id="searchInput" placeholder="ブックマークレットを検索...">
+  <button id="searchClear" aria-label="クリア">✕</button>
+</div>
+
+<!-- タグフィルター -->
+<div class="tag-filter" id="tagFilter"></div>
+
+<!-- 件数 -->
+<p class="result-count" id="resultCount"></p>
+
+<!-- ガイドボタン -->
+<div class="guide-btn-wrap">
+  <button class="btn-guide" id="openGuide">📖 登録方法・使い方を見る</button>
+</div>
+
+<!-- ガイドモーダル -->
+<div class="modal-overlay" id="guideOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="modal-handle"></div>
+    <h3 id="guideTitle">📚 ブックマークレットの使い方</h3>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong><span class="step-icon">📋</span>コードをコピー</strong>
+          <span>使いたいブックマークレットの「コピーする」ボタンをタップしてコードをコピーします。</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong><span class="step-icon">🔖</span>ブックマークに追加</strong>
+          <span>なんでもいいので今開いているページを、ブラウザの「ブックマーク（お気に入り）に追加」で保存します。</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong><span class="step-icon">✏️</span>URLを書き換える</strong>
+          <span>保存したブックマークを編集し、URL欄をすべて削除してコピーしたコードを貼り付けます。名前もわかりやすく変更しましょう。</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong><span class="step-icon">🌐</span>使いたいページで実行</strong>
+          <span>効果を試したいWebページを開いて、保存したブックマークをタップするだけ！スクリプトが実行されます。</span>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close" id="closeGuide">閉じる</button>
+  </div>
+</div>
+
+<!-- カードリスト -->
+<div class="card-list" id="cardList"></div>
+
+<!-- 空状態 -->
+<div class="empty" id="emptyState">
+  <div class="empty-icon">🔎</div>
+  <p>該当するブックマークレットが<br>見つかりませんでした</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── ブックマークレット定義 ─────────────────────────────
+  const bookmarklets = [
+    {
+      id: "copy-title-url",
+      tag: "便利ツール",
+      title: "タイトル＆URLコピー",
+      description: "閲覧中のページタイトルとURLをクリップボードにコピーします。共有やメモに便利。",
+      code: `javascript:void(function(){var t=document.title,u=location.href;navigator.clipboard.writeText(t+'\\n'+u).then(function(){alert('コピーしました!\\n'+t)}).catch(function(){prompt('コピーしてください:',t+' '+u)})})()`
+    },
+    {
+      id: "simple-reader",
+      tag: "読みやすさ",
+      title: "かんたんリーダー",
+      description: "ページの本文を中央寄せ・大きめフォントにして、読みやすく整えます。",
+      code: `javascript:void(function(){var d=document,b=d.body;b.style.maxWidth='640px';b.style.margin='0 auto';b.style.padding='16px';b.style.fontSize='18px';b.style.lineHeight='1.8';b.style.color='%23333';b.style.background='%23fefefe';var imgs=d.querySelectorAll('img');for(var i=0;i<imgs.length;i++){imgs[i].style.maxWidth='100%25';imgs[i].style.height='auto'}alert('読みやすくしました!')})()`
+    },
+    {
+      id: "yt-timecode-link",
+      tag: "YouTube",
+      title: "現在時刻で共有（t=付き）",
+      description: "YouTubeで再生中の時刻から始まる共有リンク（youtu.be形式）を生成してコピーします。動画の特定シーンを共有するときに便利。",
+      code: `javascript:void(function(){var v=document.querySelector('video');if(!v){alert('動画が見つかりません\\nYouTubeの動画ページで実行してください');return;}var p=new URLSearchParams(location.search),id=p.get('v')||location.pathname.slice(1);if(!id){alert('動画IDが取得できません');return;}var t=Math.floor(v.currentTime),url='https://youtu.be/'+id+(t>0?'?t='+t:'');navigator.clipboard.writeText(url).then(function(){alert('コピーしました!\\n'+url)}).catch(function(){prompt('コピーしてください:',url)})})()`
+    },
+    {
+      id: "yt-short-url",
+      tag: "YouTube",
+      title: "短縮URL（youtu.be）に変換",
+      description: "youtube.com/watch?v=… の長いURLを youtu.be/… の短縮URLに変換してコピーします。SNSでの共有やメモに便利。",
+      code: `javascript:void(function(){var p=new URLSearchParams(location.search),id=p.get('v');if(!id){alert('YouTube動画ページで実行してください');return;}var url='https://youtu.be/'+id;navigator.clipboard.writeText(url).then(function(){alert('短縮URLをコピーしました!\\n'+url)}).catch(function(){prompt('コピーしてください:',url)})})()`
+    },
+    {
+      id: "yt-remove-playlist",
+      tag: "YouTube",
+      title: "再生リストを除去してコピー",
+      description: "YouTubeのURLから list= / index= などの再生リスト情報を取り除いた純粋な動画URLをコピーします。余分なパラメータなしで共有したいときに。",
+      code: `javascript:void(function(){var u=new URL(location.href);u.searchParams.delete('list');u.searchParams.delete('index');u.searchParams.delete('pp');var url=u.toString();navigator.clipboard.writeText(url).then(function(){alert('再生リスト除去済みURLをコピーしました!\\n'+url)}).catch(function(){prompt('コピーしてください:',url)})})()`    },
+    {
+      id: "kiite-extract-ids",
+      tag: "Kiite→ニコニコ",
+      title: "① Kiite 動画IDを抽出",
+      description: "KiiteのプレイリストページでHTMLのdata属性（data-video-id）からニコニコ動画のID（sm/nm形式）を一括取得し、localStorageとクリップボードに保存します。ページ①で実行 → ページ②で「マイリスト追加」を実行。",
+      code: `javascript:void(function(){var b=document.querySelectorAll('[data-type="song"][data-video-id]');if(!b.length)b=document.querySelectorAll('[data-video-id]');var s=new Set(),ids=[];Array.prototype.forEach.call(b,function(e){var id=(e.getAttribute('data-video-id')||'').trim().toLowerCase();if(id&&/^(sm|nm)\\d+$/.test(id)&&!s.has(id)){s.add(id);ids.push(id);}});if(!ids.length){document.querySelectorAll('a[href]').forEach(function(a){var m=(a.href||'').match(/\\/(sm|nm)(\\d+)/i);if(m){var id=(m[1]+m[2]).toLowerCase();if(!s.has(id)){s.add(id);ids.push(id);}}});}if(!ids.length){alert('動画IDが見つかりませんでした。\\nKiiteのプレイリストページで実行してください。');return;}try{localStorage.setItem('kiite_ids',JSON.stringify(ids));}catch(e){}var msg='✅ '+ids.length+' 件の動画IDを取得しました！\\nlocalStorageに保存済みです。\\n\\nニコニコのマイリストページで\\n「② ニコニコ マイリスト追加」ブックマークレットを実行してください。';navigator.clipboard.writeText(JSON.stringify(ids)).then(function(){alert(msg+'\\n（クリップボードにもコピーしました）');}).catch(function(){alert(msg);});})()`
+    },
+    {
+      id: "niconico-mylist-add",
+      tag: "Kiite→ニコニコ",
+      title: "② ニコニコ マイリスト追加",
+      description: "①で保存した動画IDをニコニコのマイリストへ一括登録します。ニコニコにログイン済みのマイリストページ（URL に /mylist/数字 を含む）で実行してください。500ms間隔でレート制限対策済み。重複はスキップ。",
+      code: `javascript:void((async function(){var raw;try{raw=localStorage.getItem('kiite_ids');}catch(e){}if(!raw){alert('動画IDが見つかりません。\\n先にKiiteで「① Kiite 動画IDを抽出」を実行してください。');return;}var ids;try{ids=JSON.parse(raw);}catch(e){alert('IDデータが壊れています。Kiiteで再抽出してください。');return;}if(!ids||!ids.length){alert('IDリストが空です。');return;}var m=(location.pathname||'').match(/\\/mylist\\/(\\d+)/);if(!m){alert('ニコニコのマイリストページで実行してください。\\n例: https://www.nicovideo.jp/my/mylist/123456');return;}var mylistId=m[1];if(!confirm(ids.length+' 件をマイリスト(ID: '+mylistId+')に追加します。\\n500ms間隔で登録します（レート制限対策）。\\n完了まで約'+Math.ceil(ids.length*0.5)+'秒かかります。\\n\\nよろしいですか？'))return;var success=0,fail=0,skip=0;for(var i=0;i<ids.length;i++){var id=ids[i];try{var res=await fetch('https://nvapi.nicovideo.jp/v1/users/me/mylists/'+encodeURIComponent(mylistId)+'/items?itemId='+encodeURIComponent(id),{method:'POST',credentials:'include',mode:'cors',headers:{'accept':'*/*','x-request-with':'nicovideo','x-frontend-id':'3','x-client-os-type':'ios'}});if(res&&res.ok)success++;else if(res&&res.status===409)skip++;else fail++;}catch(e){fail++;}if(i<ids.length-1)await new Promise(function(r){setTimeout(r,500);});}alert('完了！\\n\\n✅ 成功: '+success+' 件\\n⏭ スキップ(重複): '+skip+' 件\\n❌ 失敗: '+fail+' 件\\n\\nページを更新して確認してください。');})()`
+    }
+  ];
+
+  // ── タグリスト生成 ─────────────────────────────────────
+  const tags = ["すべて", ...new Set(bookmarklets.map(b => b.tag))];
+  let activeTag = "すべて";
+
+  const tagFilter = document.getElementById("tagFilter");
+  tags.forEach(tag => {
+    const pill = document.createElement("button");
+    pill.className = "tag-pill" + (tag === "すべて" ? " active" : "");
+    pill.textContent = tag === "すべて" ? `🏷 すべて` : tag;
+    pill.dataset.tag = tag;
+    tagFilter.appendChild(pill);
+  });
+
+  tagFilter.addEventListener("click", e => {
+    const pill = e.target.closest(".tag-pill");
+    if (!pill) return;
+    activeTag = pill.dataset.tag;
+    document.querySelectorAll(".tag-pill").forEach(p => p.classList.toggle("active", p.dataset.tag === activeTag));
+    applyFilters();
+  });
+
+  // ── カード描画 ─────────────────────────────────────────
+  const cardList = document.getElementById("cardList");
+
+  bookmarklets.forEach(bm => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.id  = bm.id;
+    card.dataset.tag = bm.tag;
+    card.dataset.searchText = (bm.title + " " + bm.description + " " + bm.tag).toLowerCase();
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="card-title-area">
+          <span class="card-tag">${bm.tag}</span>
+          <h2>${bm.title}</h2>
+        </div>
+      </div>
+      <p>${bm.description}</p>
+      <button class="btn-copy" data-id="${bm.id}">📋 コピーする</button>
+    `;
+    cardList.appendChild(card);
+  });
+
+  // ── フィルタ処理 ──────────────────────────────────────
+  const searchInput  = document.getElementById("searchInput");
+  const searchClear  = document.getElementById("searchClear");
+  const resultCount  = document.getElementById("resultCount");
+  const emptyState   = document.getElementById("emptyState");
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    searchClear.classList.toggle("visible", q.length > 0);
+
+    let visible = 0;
+    document.querySelectorAll(".card").forEach(card => {
+      const matchTag    = activeTag === "すべて" || card.dataset.tag === activeTag;
+      const matchSearch = !q || card.dataset.searchText.includes(q);
+      const show = matchTag && matchSearch;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    resultCount.innerHTML = `<span>${visible}</span> 件`;
+    emptyState.classList.toggle("show", visible === 0);
+  }
+
+  searchInput.addEventListener("input", applyFilters);
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    applyFilters();
+    searchInput.focus();
+  });
+
+  applyFilters(); // 初期表示
+
+  // ── ガイドモーダル ─────────────────────────────────────
+  const guideOverlay = document.getElementById("guideOverlay");
+  document.getElementById("openGuide").addEventListener("click", () => {
+    guideOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  });
+  function closeGuide() {
+    guideOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  document.getElementById("closeGuide").addEventListener("click", closeGuide);
+  guideOverlay.addEventListener("click", e => { if (e.target === guideOverlay) closeGuide(); });
+
+  // ── コピー処理 ─────────────────────────────────────────
+  const toast = document.getElementById("toast");
+  let toastTimer;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2000);
+  }
+
+  cardList.addEventListener("click", async e => {
+    const btn = e.target.closest(".btn-copy");
+    if (!btn) return;
+
+    const bm = bookmarklets.find(b => b.id === btn.dataset.id);
+    if (!bm) return;
+
+    try {
+      await navigator.clipboard.writeText(bm.code);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = bm.code;
+      ta.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+
+    btn.textContent = "✅ コピーしました！";
+    btn.classList.add("copied");
+    showToast("✅ クリップボードにコピーしました");
+
+    setTimeout(() => {
+      btn.textContent = "📋 コピーする";
+      btn.classList.remove("copied");
+    }, 2500);
+  });
+</script>
+
+</body>
+</html>
