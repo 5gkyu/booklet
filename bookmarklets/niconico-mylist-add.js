@@ -55,7 +55,7 @@ javascript:void((async function(){
   );
   if (!ok) return;
 
-  var success = 0, fail = 0, skip = 0;
+  var success = 0, fail = 0, skip = 0, firstErr = '';
 
   for (var i = 0; i < ids.length; i++) {
     var id = ids[i];
@@ -85,9 +85,11 @@ javascript:void((async function(){
         skip++;
       } else {
         fail++;
+        if (!firstErr) firstErr = 'HTTP ' + res.status + ' (' + id + ')';
       }
     } catch(e) {
       fail++;
+      if (!firstErr) firstErr = String(e) + ' (' + id + ')';
     }
 
     // レート制限対策: 最後の1件以外は 500ms 待機
@@ -100,8 +102,9 @@ javascript:void((async function(){
     '完了！\n\n'
     + '✅ 成功:         ' + success + ' 件\n'
     + '⏭ スキップ(重複): ' + skip    + ' 件\n'
-    + '❌ 失敗:         ' + fail    + ' 件\n\n'
-    + 'ページを更新して確認してください。'
+    + '❌ 失敗:         ' + fail    + ' 件\n'
+    + (firstErr ? '\n最初のエラー:\n' + firstErr + '\n' : '')
+    + '\nページを更新して確認してください。'
   );
 
   } catch(e) { alert('エラー: ' + e); }
