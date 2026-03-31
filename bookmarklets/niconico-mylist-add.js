@@ -118,6 +118,7 @@ javascript:void((async function(){
     + (firstErr ? '\n最初のエラー:\n' + firstErr + '\n' : '')
     + '\nページを更新して確認してください。'
   );
+  location.reload();
 
   } catch(e) { alert('エラー: ' + e); }
 

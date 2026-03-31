@@ -28,15 +28,19 @@ javascript:void(function(){
     if (id && /^(sm|nm)\d+$/.test(id) && !seen.has(id)) {
       seen.add(id);
 
-      // ── コメント取得: 親要素を最大6段階さかのぼって .playlist-cmnt-txt を探す ──
+      // コメント取得: まず要素自身の中を検索、なければ親にさかのぼる
       var memo = '';
-      var p = el;
-      for (var i = 0; i < 6; i++) {
-        p = p && p.parentElement;
-        if (!p) break;
-        var c = p.querySelector('.playlist-cmnt-txt');
-        if (c) { memo = c.textContent.trim(); break; }
+      var ct = el.querySelector('.playlist-cmnt-txt');
+      if (!ct) {
+        var p = el;
+        for (var i = 0; i < 6; i++) {
+          p = p && p.parentElement;
+          if (!p) break;
+          ct = p.querySelector('.playlist-cmnt-txt');
+          if (ct) break;
+        }
       }
+      if (ct) memo = ct.textContent.trim();
 
       items.push({ id: id, memo: memo });
     }
