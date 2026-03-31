@@ -29,42 +29,54 @@ javascript:void((async function(){
   var mylistId = m[1];
 
   // ── prompt でIDリストを受け取る（クリップボードから貼り付け） ──
+  // ①の出力形式: [{id:"sm123",memo:"コメント"}, ...]
+  // 旧形式 ["sm123", ...] にも対応
   var raw = prompt(
     '①で取得したIDリストを貼り付けてください:\n'
     + '（① 実行後にクリップボードへコピー済みのJSON）'
   );
   if (!raw) { return; }
 
-  var ids;
-  try { ids = JSON.parse(raw); } catch(e) {
+  var parsed;
+  try { parsed = JSON.parse(raw); } catch(e) {
     alert('形式エラー。①を再実行してください。');
     return;
   }
 
-  if (!ids || !ids.length) {
+  if (!parsed || !parsed.length) {
     alert('IDリストが空です。');
     return;
   }
 
+  // 旧形式（文字列配列）も受け付ける
+  var items = parsed.map(function(x) {
+    return typeof x === 'string' ? { id: x, memo: '' } : x;
+  });
+
   // ── 確認ダイアログ ──
   var ok = confirm(
-    ids.length + ' 件をマイリスト(ID: ' + mylistId + ')に追加します。\n'
+    items.length + ' 件をマイリスト(ID: ' + mylistId + ')に追加します。\n'
     + '500ms 間隔で登録（レート制限対策）。\n'
-    + '完了まで約 ' + Math.ceil(ids.length * 0.5) + ' 秒\n'
+    + '完了まで約 ' + Math.ceil(items.length * 0.5) + ' 秒\n'
     + 'よろしいですか？'
   );
   if (!ok) return;
 
   var success = 0, fail = 0, skip = 0, firstErr = '';
 
-  for (var i = 0; i < ids.length; i++) {
-    var id = ids[i];
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var id   = item.id;
+    var memo = item.memo || '';
     try {
+      // memo が空でなければ &memo= を付加（ニコニコのマイリストメモ機能）
+      var url = 'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
+        + encodeURIComponent(mylistId)
+        + '/items?itemId='
+        + encodeURIComponent(id)
+        + (memo ? '&memo=' + encodeURIComponent(memo) : '');
       var res = await fetch(
-        'https://nvapi.nicovideo.jp/v1/users/me/mylists/'
-          + encodeURIComponent(mylistId)
-          + '/items?itemId='
-          + encodeURIComponent(id),
+        url,
         {
           method: 'POST',
           credentials: 'include',
@@ -93,7 +105,7 @@ javascript:void((async function(){
     }
 
     // レート制限対策: 最後の1件以外は 500ms 待機
-    if (i < ids.length - 1) {
+    if (i < items.length - 1) {
       await new Promise(function(r) { setTimeout(r, 500); });
     }
   }

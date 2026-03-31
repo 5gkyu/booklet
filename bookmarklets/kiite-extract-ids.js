@@ -19,45 +19,55 @@ javascript:void(function(){
     blocks = document.querySelectorAll('[data-video-id]');
   }
 
-  var seen = new Set();
-  var ids  = [];
+  var seen  = new Set();
+  var items = []; // [{id, memo}, ...] 形式で保存
 
   Array.prototype.forEach.call(blocks, function(el) {
     var id = el.getAttribute('data-video-id') || '';
     id = id.trim().toLowerCase();
     if (id && /^(sm|nm)\d+$/.test(id) && !seen.has(id)) {
       seen.add(id);
-      ids.push(id);
+
+      // ── コメント取得: 親要素を最大6段階さかのぼって .playlist-cmnt-txt を探す ──
+      var memo = '';
+      var p = el;
+      for (var i = 0; i < 6; i++) {
+        p = p && p.parentElement;
+        if (!p) break;
+        var c = p.querySelector('.playlist-cmnt-txt');
+        if (c) { memo = c.textContent.trim(); break; }
+      }
+
+      items.push({ id: id, memo: memo });
     }
   });
 
-  // ── Step3: fallback — <a href> 内の sm/nm パターン ──
-  if (!ids.length) {
+  // ── Step3: fallback — <a href> 内の sm/nm パターン（コメントなし） ──
+  if (!items.length) {
     document.querySelectorAll('a[href]').forEach(function(a) {
       var m = (a.href || '').match(/\/(sm|nm)(\d+)/i);
       if (m) {
         var id = (m[1] + m[2]).toLowerCase();
-        if (!seen.has(id)) { seen.add(id); ids.push(id); }
+        if (!seen.has(id)) { seen.add(id); items.push({ id: id, memo: '' }); }
       }
     });
   }
 
-  if (!ids.length) {
+  if (!items.length) {
     alert('動画IDが見つかりませんでした。\nKiiteのプレイリストページで実行してください。');
     return;
   }
 
   // ── localStorage に保存 ──
   try {
-    localStorage.setItem('kiite_ids', JSON.stringify(ids));
+    localStorage.setItem('kiite_ids', JSON.stringify(items));
   } catch(e) { /* プライベートブラウジング等で書き込めない場合は無視 */ }
 
   // ── クリップボードにも保存（フォールバックあり） ──
-  var msg = '✅ ' + ids.length + ' 件の動画IDを取得しました！\n'
-          + 'localStorageに保存済みです。\n\n'
-          + 'ニコニコのマイリストページで\n「ニコニコ マイリスト追加」ブックマークレットを実行してください。';
+  var msg = '✅ ' + items.length + ' 件を取得しました（コメント付き）！\n\n'
+          + 'ニコニコのマイリストページで\n「② ニコニコ マイリスト追加」ブックマークレットを実行してください。';
 
-  navigator.clipboard.writeText(JSON.stringify(ids))
-    .then(function()  { alert(msg + '\n（クリップボードにもコピーしました）'); })
+  navigator.clipboard.writeText(JSON.stringify(items))
+    .then(function()  { alert(msg + '\n（クリップボードにコピーしました）'); })
     .catch(function() { alert(msg); });
 })()
