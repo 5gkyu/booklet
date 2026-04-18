@@ -1205,7 +1205,7 @@ body.modal-add-open { overflow: hidden; }
   padding-bottom: env(safe-area-inset-bottom, 0px);
   background: linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));
   border-top: 1px solid rgba(6,50,58,0.08);
-  box-shadow: 0 -4px 16px rgba(2,18,22,0.06);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
   z-index: 9999;
   justify-content: space-around;
   align-items: center;
@@ -1242,7 +1242,7 @@ html.dark-mode .bottom-nav {
 
 .bottom-nav-btn:hover,
 .bottom-nav-btn:active {
-  background: rgba(15,184,191,0.1);
+  background: color-mix(in srgb, var(--accent-1) 12%, transparent);
   color: var(--accent-1);
 }
 

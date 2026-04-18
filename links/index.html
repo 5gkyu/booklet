@@ -126,40 +126,6 @@
           </div>
           <div class="sidebar-tags" id="sidebarTags"></div>
         </div>
-        <div class="sidebar-section">
-          <h4 class="sidebar-title">🖼️ 表示設定</h4>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-                <label style="min-width:70px;">レイアウト:</label>
-                <div id="layoutToggle" style="display:flex;gap:6px;">
-                  <button id="layoutBtnPhone" class="small-btn layout-toggle-btn" data-value="list" type="button">スマートフォン</button>
-                  <button id="layoutBtnDesktop" class="small-btn layout-toggle-btn" data-value="grid" type="button">タブレット/PC</button>
-                </div>
-                <!-- hidden select kept for compatibility with existing JS -->
-                <select id="sidebarLayout" style="display:none;">
-                  <option value="list">スマートフォン</option>
-                  <option value="grid">タブレット/PC</option>
-                </select>
-              </div>
-            <div id="sidebarViewSizeRow" style="display:flex;align-items:center;gap:8px;">
-              <label style="min-width:70px;">表示サイズ:</label>
-              <select id="sidebarViewSize" style="flex:1;padding:6px;border-radius:6px;">
-                <option value="small">小</option>
-                <option value="medium">中</option>
-              </select>
-            </div>
-            <div id="sidebarColsRow" style="display:flex;align-items:center;gap:8px;">
-              <label style="min-width:70px;">カラム数:</label>
-              <select id="sidebarCols" style="flex:1;padding:6px;border-radius:6px;">
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-              </select>
-            </div>
-          </div>
-        </div>
       </aside>
 
       <main>
@@ -337,6 +303,17 @@
                 <option value="date-old">📅 古い順</option>
               </select>
             </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <label style="min-width:80px;">レイアウト:</label>
+              <div id="layoutToggle" style="display:flex;gap:6px;">
+                <button id="layoutBtnPhone" class="small-btn layout-toggle-btn" data-value="list" type="button">スマートフォン</button>
+                <button id="layoutBtnDesktop" class="small-btn layout-toggle-btn" data-value="grid" type="button">タブレット/PC</button>
+              </div>
+              <select id="sidebarLayout" style="display:none;">
+                <option value="list">スマートフォン</option>
+                <option value="grid">タブレット/PC</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -367,7 +344,6 @@
         </div>
       </div>
 
-      <!-- Appearance: Desktop layout selector removed (controlled via sidebar only) -->
       <!-- Grid column count selector -->
       <div id="gridColsSettingRow" style="margin-top:8px;">
         <div class="form-row" style="margin-bottom:6px">
