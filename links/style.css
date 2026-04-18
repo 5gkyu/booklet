@@ -1,0 +1,1459 @@
+
+/* Extracted from linklocal.html - combined styles */
+:root{
+  --bg: #f6fbfb;
+  --card: #ffffff;
+  --card-rgb: 255,255,255;
+  --accent-1: #0fb8bf;
+  --accent-2: #8fe3dd;
+  --text: #073a46;
+  --muted: #57727a;
+  --radius:12px;
+  --gap:12px;
+  --row-h:72px;
+}
+
+/* Dark mode variables applied when html has .dark-mode */
+html.dark-mode{
+  --bg: #07181a;
+  --card: #071e1f;
+  --card-rgb: 7,30,31;
+  --accent-1: #17c3c6;
+  --accent-2: #5fbfc0;
+  --text: #e6fbfb;
+  --muted: #9fb5b7;
+}
+
+/* ピンク + コーラル (Awake) */
+html.theme-kohane{
+  --bg: #ffdada;
+  --card: #ffffff;
+  --accent-1: #ff6b8a;
+  --accent-2: #ff9eb0;
+  --text: #5c3a3a;
+  --muted: #8a6565;
+}
+
+html.theme-kohane body{
+  background-image: linear-gradient(rgba(255,235,235,0.8), rgba(255,235,235,0.8)), url('backimage.png');
+  background-blend-mode: overlay;
+  background-color: var(--bg);
+}
+
+html.theme-kohane .desc{ color: rgba(92,74,74,0.88); }
+html.theme-kohane .tag{ background: rgba(255,143,163,0.12); color: var(--text); border: 1px solid rgba(255,143,163,0.2); }
+
+html.theme-kohane header.card{ background: linear-gradient(180deg, #ffffff, rgba(255,245,240,0.95)); }
+
+html.theme-kohane .row{
+  background: linear-gradient(135deg, #ffffff, #fff5f0);
+  border: 1px solid rgba(255,143,163,0.15);
+  box-shadow: 0 4px 12px rgba(255,143,163,0.08);
+}
+html.theme-kohane .row:hover{
+  box-shadow: 0 8px 24px rgba(255,143,163,0.15);
+}
+
+html.theme-kohane .open-btn,
+html.theme-kohane .actions .open-btn,
+html.theme-kohane .row .open-btn,
+html.theme-kohane .panel .open-btn{
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(255,143,163,0.25) !important;
+}
+
+html.theme-kohane .icon-wrap{ background: rgba(255,143,163,0.1); color: var(--text); }
+
+html.theme-kohane select,
+html.theme-kohane input[type="url"],
+html.theme-kohane input,
+html.theme-kohane textarea{
+  background: #fff;
+  color: var(--text);
+  border: 1px solid rgba(255,143,163,0.25);
+}
+
+html.theme-kohane button:not(.open-btn):not(.bottom-nav-btn){
+  background: #fff8f5;
+  color: var(--text);
+  border: 1px solid rgba(255,143,163,0.2);
+}
+
+html.theme-kohane .chip,
+html.theme-kohane .small-btn{
+  background: rgba(255,143,163,0.1);
+  border: 1px solid rgba(255,143,163,0.2);
+}
+
+html.theme-kohane .modal .panel{
+  background: linear-gradient(180deg, #ffffff, #fff8f5);
+  border: 1px solid rgba(255,143,163,0.15);
+}
+
+html.theme-kohane .bottom-nav{
+  background: linear-gradient(180deg, #ffffff, #fff5f0);
+  border-top: 1px solid rgba(255,143,163,0.15);
+}
+
+html.theme-kohane .bottom-nav-btn{
+  color: var(--text);
+}
+html.theme-kohane .bottom-nav-btn:hover{
+  background: rgba(255,143,163,0.1);
+}
+
+html.theme-kohane .search-overlay-content{
+  background: #ffffff;
+  border: 1px solid rgba(255,143,163,0.2);
+}
+
+/* ========== トワイライトテーマ (Twilight) ========== */
+html.theme-lavender{
+  --bg: #e8d5f0;
+  --card: #ffffff;
+  --accent-1: #9575cd;
+  --accent-2: #ba68c8;
+  --text: #3a2a4a;
+  --muted: #7a6a8a;
+}
+
+html.theme-lavender body{
+  background-image: linear-gradient(rgba(243,229,245,0.8), rgba(243,229,245,0.8)), url('backimage.png');
+  background-blend-mode: overlay;
+  background-color: var(--bg);
+}
+
+html.theme-lavender .desc{ color: rgba(74,58,90,0.88); }
+html.theme-lavender .tag{ background: rgba(179,157,219,0.15); color: var(--text); border: 1px solid rgba(179,157,219,0.25); }
+
+html.theme-lavender header.card{ background: linear-gradient(180deg, #ffffff, rgba(243,229,245,0.95)); }
+
+html.theme-lavender .row{
+  background: linear-gradient(135deg, #ffffff, #f8f3fa);
+  border: 1px solid rgba(179,157,219,0.2);
+  box-shadow: 0 4px 12px rgba(179,157,219,0.1);
+}
+html.theme-lavender .row:hover{
+  box-shadow: 0 8px 24px rgba(179,157,219,0.18);
+}
+
+html.theme-lavender .open-btn,
+html.theme-lavender .actions .open-btn,
+html.theme-lavender .row .open-btn,
+html.theme-lavender .panel .open-btn{
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(179,157,219,0.3) !important;
+}
+
+html.theme-lavender .icon-wrap{ background: rgba(179,157,219,0.12); color: var(--text); }
+
+html.theme-lavender select,
+html.theme-lavender input[type="url"],
+html.theme-lavender input,
+html.theme-lavender textarea{
+  background: #fff;
+  color: var(--text);
+  border: 1px solid rgba(179,157,219,0.3);
+}
+
+html.theme-lavender button:not(.open-btn):not(.bottom-nav-btn){
+  background: #f8f3fa;
+  color: var(--text);
+  border: 1px solid rgba(179,157,219,0.25);
+}
+
+html.theme-lavender .chip,
+html.theme-lavender .small-btn{
+  background: rgba(179,157,219,0.12);
+  border: 1px solid rgba(179,157,219,0.2);
+}
+
+html.theme-lavender .modal .panel{
+  background: linear-gradient(180deg, #ffffff, #f8f3fa);
+  border: 1px solid rgba(179,157,219,0.2);
+}
+
+html.theme-lavender .bottom-nav{
+  background: linear-gradient(180deg, #ffffff, #f8f3fa);
+  border-top: 1px solid rgba(179,157,219,0.2);
+}
+
+html.theme-lavender .bottom-nav-btn{
+  color: var(--text);
+}
+html.theme-lavender .bottom-nav-btn:hover{
+  background: rgba(179,157,219,0.12);
+}
+
+html.theme-lavender .search-overlay-content{
+  background: #ffffff;
+  border: 1px solid rgba(179,157,219,0.25);
+}
+
+/* ========== オーシャンテーマ (Ocean) ========== */
+html.theme-mint{
+  --bg: #d0f0ec;
+  --card: #ffffff;
+  --accent-1: #26a69a;
+  --accent-2: #4dd0c0;
+  --text: #1a4a44;
+  --muted: #4a7a75;
+}
+
+html.theme-mint body{
+  background-image: linear-gradient(rgba(224,247,244,0.8), rgba(224,247,244,0.8)), url('backimage.png');
+  background-blend-mode: overlay;
+  background-color: var(--bg);
+}
+
+html.theme-mint .desc{ color: rgba(45,90,84,0.88); }
+html.theme-mint .tag{ background: rgba(77,208,192,0.15); color: var(--text); border: 1px solid rgba(77,208,192,0.25); }
+
+html.theme-mint header.card{ background: linear-gradient(180deg, #ffffff, rgba(224,247,244,0.95)); }
+
+html.theme-mint .row{
+  background: linear-gradient(135deg, #ffffff, #f0faf8);
+  border: 1px solid rgba(77,208,192,0.2);
+  box-shadow: 0 4px 12px rgba(77,208,192,0.1);
+}
+html.theme-mint .row:hover{
+  box-shadow: 0 8px 24px rgba(77,208,192,0.18);
+}
+
+html.theme-mint .open-btn,
+html.theme-mint .actions .open-btn,
+html.theme-mint .row .open-btn,
+html.theme-mint .panel .open-btn{
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(77,208,192,0.3) !important;
+}
+
+html.theme-mint .icon-wrap{ background: rgba(77,208,192,0.12); color: var(--text); }
+
+html.theme-mint select,
+html.theme-mint input[type="url"],
+html.theme-mint input,
+html.theme-mint textarea{
+  background: #fff;
+  color: var(--text);
+  border: 1px solid rgba(77,208,192,0.3);
+}
+
+html.theme-mint button:not(.open-btn):not(.bottom-nav-btn){
+  background: #f0faf8;
+  color: var(--text);
+  border: 1px solid rgba(77,208,192,0.25);
+}
+
+html.theme-mint .chip,
+html.theme-mint .small-btn{
+  background: rgba(77,208,192,0.12);
+  border: 1px solid rgba(77,208,192,0.2);
+}
+
+html.theme-mint .modal .panel{
+  background: linear-gradient(180deg, #ffffff, #f0faf8);
+  border: 1px solid rgba(77,208,192,0.2);
+}
+
+html.theme-mint .bottom-nav{
+  background: linear-gradient(180deg, #ffffff, #f0faf8);
+  border-top: 1px solid rgba(77,208,192,0.2);
+}
+
+html.theme-mint .bottom-nav-btn{
+  color: var(--text);
+}
+html.theme-mint .bottom-nav-btn:hover{
+  background: rgba(77,208,192,0.12);
+}
+
+html.theme-mint .search-overlay-content{
+  background: #ffffff;
+  border: 1px solid rgba(77,208,192,0.25);
+}
+
+/* Dark-mode specific background overlay and text tweaks */
+html.dark-mode body{
+  /* darken the bright background image with a semi-opaque gradient to reduce highlight contrast */
+  background-image: linear-gradient(rgba(2,12,14,0.68), rgba(2,12,14,0.68)), url('backimage.png');
+  background-blend-mode: overlay;
+  background-color: var(--bg);
+}
+
+/* improve description contrast in dark mode */
+html.dark-mode .desc{ color: rgba(230,251,251,0.92); }
+html.dark-mode .tag{ background: rgba(255,255,255,0.06); color: var(--text); border:1px solid rgba(255,255,255,0.04); }
+
+/* slightly dim header background highlights on dark mode */
+html.dark-mode header.card{ background: linear-gradient(180deg, var(--card), rgba(7,30,31,0.9)); }
+
+/* Dark-mode: make link cards solid and clearly separated from background */
+html.dark-mode .row{
+  /* Make cards slightly brighter than page background for strong separation */
+  background: #0e3232; /* slightly brighter solid card */
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 18px rgba(2,8,10,0.55);
+}
+html.dark-mode .row:hover{
+  box-shadow: 0 10px 30px rgba(2,8,10,0.65);
+}
+/* Reduce card inner gradient/shine for open button and other elements */
+html.dark-mode .open-btn,
+html.dark-mode .actions .open-btn,
+html.dark-mode .row .open-btn,
+html.dark-mode .panel .open-btn,
+html.dark-mode .row .actions .open-btn{
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+/* Make icon-wrap use a subdued solid background in dark mode */
+html.dark-mode .icon-wrap{ background: rgba(23,195,198,0.12); color: var(--text); }
+html.dark-mode .icon-wrap img{ filter: none; }
+
+/* Dark-mode: controls (selects, buttons, chip area, count row) */
+html.dark-mode select,
+html.dark-mode input[type="url"],
+html.dark-mode input,
+html.dark-mode textarea{
+  background: #0b2a2a;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+/* General button dark mode - but NOT .open-btn which has its own gradient */
+html.dark-mode button:not(.open-btn):not(.bottom-nav-btn){
+  background: #0b2a2a;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Make native dropdown/options dark where possible */
+html.dark-mode select option,
+html.dark-mode option{
+  background: #051616; /* dark option background */
+  color: var(--text);
+}
+/* Ensure opened select box itself looks dark on focus/active */
+html.dark-mode select:focus,
+html.dark-mode select:active{
+  background: #051616;
+  color: var(--text);
+}
+/* IE/Edge expand icon contrast */
+html.dark-mode select::-ms-expand{ filter: invert(1) brightness(1.2); }
+/* WebKit safari/chrome: try to improve option text color */
+html.dark-mode select::-webkit-color-swatch { color: var(--text); }
+
+html.dark-mode .chip,
+html.dark-mode .tag,
+html.dark-mode .more-btn,
+html.dark-mode .small-btn{
+  /* Make control chips/tags darker than cards to avoid blending when overlapping */
+  background: rgba(0,0,0,0.45);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Ensure active chip highlight appears in dark mode */
+html.dark-mode .chip.active{
+  background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  color: #ffffff;
+  border-color: transparent;
+  font-weight:700;
+}
+
+html.dark-mode #count .count-row{
+  /* Make count/action row darker than cards so it remains distinct when scrolled */
+  background: rgba(0,0,0,0.5);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Search input and placeholder contrast */
+html.dark-mode .search input{ background:#062525; color:var(--text); border:1px solid rgba(255,255,255,0.06); }
+html.dark-mode .search input::placeholder{ color: rgba(230,251,251,0.6); }
+
+/* Make selector/controls lines darker than cards */
+html.dark-mode .selector,
+html.dark-mode .top-row,
+html.dark-mode .top-buttons,
+html.dark-mode .tagbar,
+html.dark-mode .chip-container{
+  background: rgba(0,0,0,0.48);
+}
+
+/* Ensure header controls and selector are visible */
+html.dark-mode .selector select{ background:#0b2a2a; color:var(--text); border:1px solid rgba(255,255,255,0.06); }
+html.dark-mode .selector button{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.04); }
+
+/* Modal panels contrast in dark mode */
+html.dark-mode .modal .panel{ background: #0c2c2c; color: var(--text); border:1px solid rgba(255,255,255,0.04); }
+
+/* make tags grid clearer */
+html.dark-mode .tags{ color: var(--text); }
+
+
+/* Dark-mode: make Google sign-in and user avatar contrast-friendly */
+html.dark-mode #googleSignInBtn2{
+  background: linear-gradient(90deg, rgba(23,195,198,0.08), rgba(95,191,192,0.06));
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: none !important;
+}
+html.dark-mode #googleSignInBtn2 img{ filter: none; mix-blend-mode: normal; }
+
+html.dark-mode .user-mini-avatar{
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+html.dark-mode .user-mini-avatar img{ border: 1px solid rgba(255,255,255,0.06); }
+
+html,body{height:100%;width:100%;margin:0;font-family:Inter, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+/* Background image served from GitHub Pages */
+body{background-image: url('backimage.png');background-attachment:fixed;background-size:cover;background-position:center;min-height:100vh}
+.wrap{max-width:980px;margin:0 auto;padding:8px}
+/* Optional font variants controlled via html class */
+html.font-dotgothic16, html.font-dotgothic16 body{
+  font-family: 'DotGothic16', "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+}
+html.font-mplus, html.font-mplus body{
+  font-family: 'M PLUS Rounded 1c', "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+}
+html.font-kosugi, html.font-kosugi body{
+  font-family: 'Kosugi Maru', "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+}
+html.font-yomogi, html.font-yomogi body{
+  font-family: 'Yomogi', "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+}
+html.font-notojp, html.font-notojp body{
+  font-family: 'Noto Sans JP', "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+}
+/* 'default' uses the existing Inter / system stack */
+/* Ensure all UI elements inherit the selected font */
+button, input, select, textarea, .bottom-nav, .bottom-nav-btn, .modal .panel, .small-btn, .open-btn, .top-btn, .chip, .tag-btn{
+  font-family: inherit;
+}
+/* Desktop layout: content row */
+.content-row{display:flex;gap:12px;align-items:flex-start}
+.sidebar{display:block;width:260px;flex:0 0 260px;position:sticky;top:var(--hdr-h,0px);align-self:flex-start;max-height:calc(100vh - var(--hdr-h,0px));overflow:auto;padding:12px;background:var(--card);border-radius:12px;border:1px solid rgba(6,50,58,0.06);box-shadow:0 4px 16px rgba(2,18,22,0.06)}
+@media(max-width:880px){.sidebar{display:none}.content-row{display:block}}
+/* Desktop: pin sidebar to viewport left edge and push main content to the right so
+   there's no left gap and the right side doesn't get clipped. This only applies
+   on sufficiently wide screens. */
+@media(min-width:881px){
+  .sidebar{position:fixed;left:0;top:var(--hdr-h,0px);height:calc(100vh - var(--hdr-h,0px));overflow:auto;z-index:994;border-radius:0;border-left:none;border-top:none}
+  /* make the outer wrap reserve space for the fixed sidebar */
+  .wrap{box-sizing:border-box;padding-left:300px;max-width:none}
+  /* ensure content row takes remaining width and doesn't overflow */
+  .content-row{margin:0;max-width:100%;}
+  main{max-width:calc(100% - 10px);}
+}
+
+/* Sidebar styling */
+.sidebar-section{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(6,50,58,0.08)}
+.sidebar-section:last-child{border-bottom:none;margin-bottom:0}
+.sidebar-title{font-size:13px;font-weight:700;color:var(--text);margin:0 0 10px 0;display:flex;align-items:center;gap:6px}
+.sidebar-search input{width:100%;padding:8px 10px;border-radius:8px;border:1px solid rgba(6,50,58,0.1);background:var(--bg);color:var(--text);font-size:13px;box-sizing:border-box}
+.sidebar-search input::placeholder{color:var(--muted)}
+.sidebar-tags{display:flex;flex-direction:column;gap:4px;max-height:300px;overflow-y:auto;margin-top:8px;padding-right:12px;box-sizing:border-box;scrollbar-gutter:stable}
+.sidebar-tag{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:8px;background:rgba(6,50,58,0.03);border:1px solid transparent;cursor:pointer;font-size:12px;font-weight:600;color:var(--text);transition:all 0.15s ease;box-sizing:border-box;min-width:0}
+.sidebar-tag:hover{background:rgba(15,184,191,0.08);border-color:rgba(15,184,191,0.2)}
+.sidebar-tag.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border-color:transparent}
+.sidebar-tag .tag-count{font-size:11px;opacity:0.7;font-weight:500}
+.sidebar-tag.active .tag-count{opacity:1}
+.sidebar-controls{display:flex;flex-direction:column;gap:8px}
+.sidebar-control-row{display:flex;align-items:center;gap:8px}
+.sidebar-control-row label{font-size:12px;font-weight:600;color:var(--muted);min-width:60px}
+.sidebar-control-row select{flex:1;padding:6px 8px;border-radius:6px;border:1px solid rgba(6,50,58,0.1);background:var(--bg);color:var(--text);font-size:12px}
+.sidebar-stats{display:flex;flex-direction:column;gap:6px}
+.stat-item{display:flex;justify-content:space-between;font-size:12px}
+.stat-label{color:var(--muted);font-weight:500}
+.stat-value{color:var(--text);font-weight:700}
+
+/* Dark mode sidebar */
+html.dark-mode .sidebar{background:#0c2c2c;border-color:rgba(255,255,255,0.06)}
+html.dark-mode .sidebar-section{border-bottom-color:rgba(255,255,255,0.06)}
+html.dark-mode .sidebar-search input{background:#0b2a2a;border-color:rgba(255,255,255,0.08)}
+html.dark-mode .sidebar-tag{background:rgba(255,255,255,0.03)}
+html.dark-mode .sidebar-tag:hover{background:rgba(23,195,198,0.12);border-color:rgba(23,195,198,0.25)}
+html.dark-mode .sidebar-tag.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 6px 14px rgba(0,0,0,0.25)}
+html.dark-mode .sidebar-control-row select{background:#0b2a2a;border-color:rgba(255,255,255,0.08)}
+
+/* Theme-specific sidebar styles */
+html.theme-kohane .sidebar{background:linear-gradient(180deg,#fff,#fff8f5);border-color:rgba(255,143,163,0.15)}
+html.theme-kohane .sidebar-section{border-bottom-color:rgba(255,143,163,0.12)}
+html.theme-kohane .sidebar-tag:hover{background:rgba(255,143,163,0.1);border-color:rgba(255,143,163,0.2)}
+html.theme-kohane .sidebar-tag.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2))}
+
+html.theme-lavender .sidebar{background:linear-gradient(180deg,#fff,#f8f3fa);border-color:rgba(179,157,219,0.15)}
+html.theme-lavender .sidebar-section{border-bottom-color:rgba(179,157,219,0.12)}
+html.theme-lavender .sidebar-tag:hover{background:rgba(179,157,219,0.1);border-color:rgba(179,157,219,0.2)}
+html.theme-lavender .sidebar-tag.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2))}
+
+html.theme-mint .sidebar{background:linear-gradient(180deg,#fff,#f0faf8);border-color:rgba(77,208,192,0.15)}
+html.theme-mint .sidebar-section{border-bottom-color:rgba(77,208,192,0.12)}
+html.theme-mint .sidebar-tag:hover{background:rgba(77,208,192,0.1);border-color:rgba(77,208,192,0.2)}
+html.theme-mint .sidebar-tag.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2))}
+
+  /* Footer styling removed - footer will not be rendered in this build */
+
+/* Sticky header so search is always visible */
+header.card{position:fixed;left:0;right:0;top:0;z-index:1000;background:linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));backdrop-filter: blur(6px);padding:12px;border-radius:0;box-shadow:0 10px 30px rgba(2,18,22,0.06);border:1px solid rgba(6,50,58,0.04);display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:200px;position:relative}
+.search input{width:100%;padding:12px 44px 12px 12px;border-radius:10px;border:1px solid rgba(6,50,58,0.08);background:var(--card);color:var(--text);font-size:16px;box-shadow: inset 0 1px 0 rgba(2,12,14,0.02)}
+.search{flex:1 1 auto;min-width:0}
+.search input{box-sizing:border-box}
+.search input::placeholder{color:#9fb5b7}
+.search .icon{position:absolute;right:10px;top:50%;transform:translateY(-50%);opacity:0.9;font-weight:600;color:var(--muted);white-space:nowrap;pointer-events:none}
+.selector{display:flex;gap:8px;align-items:center}
+.selector{flex:0 0 auto}
+select, button, input[type="url"]{padding:10px 12px;border-radius:10px;border:1px solid rgba(6,50,58,0.08);background:var(--card);color:var(--text)}
+
+/* Header controls: ensure selector and top-buttons are visible in header */
+header.card .selector{display:flex;align-items:center}
+  
+.list{display:flex;flex-direction:column;gap:8px;padding-top:16px}
+/* Prevent parent/page overscroll when interacting with the list on mobile.
+   This reduces pull-to-refresh / page-bounce caused by fast vertical swipes.
+   Browsers that support it will contain the scroll in `.list`. */
+.list{
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Desktop grid layout when user selects Grid layout */
+@media(min-width:881px){
+  .list.layout-grid{
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols, 5), 1fr);
+    gap: 18px;
+    align-items: start;
+    padding-top: 8px;
+  }
+  /* Column count variations (set via JS on .list element) */
+  .list.layout-grid.cols-3{ --grid-cols: 3; }
+  .list.layout-grid.cols-4{ --grid-cols: 4; }
+  .list.layout-grid.cols-5{ --grid-cols: 5; }
+  .list.layout-grid.cols-6{ --grid-cols: 6; }
+  .list.layout-grid.cols-7{ --grid-cols: 7; }
+
+  /* Card-style tiles for grid layout: icon as hero background */
+  .list.layout-grid .row{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    height: 260px; /* Fixed height for uniform cards */
+    padding: 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));
+    border: 1px solid rgba(6,50,58,0.04);
+    box-shadow: 0 2px 8px rgba(2,18,22,0.04);
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .list.layout-grid .row:hover{ transform: translateY(-4px); box-shadow: 0 16px 36px rgba(2,18,22,0.12); }
+
+  /* Icon as hero image - centered, covering top portion */
+  .list.layout-grid .icon-wrap{
+    flex: 0 0 auto;
+    width: 100%;
+    height: 120px;
+    margin: 0;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  }
+  /* Hero image fills the icon area; fallback favicon uses smaller centered style */
+  .list.layout-grid .icon-wrap img{
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+    display: block;
+  }
+  /* When a hero image is identified as square, show the whole image (no crop) */
+  .list.layout-grid .icon-wrap img.hero.square{
+    object-fit: contain;
+  }
+  /* Subtle light overlay behind square hero images so theme color is muted
+     and the square icon/photo is clearly visible. Dark mode uses a faint
+     dark overlay instead for contrast. */
+  .list.layout-grid .icon-wrap img.hero.square{
+    background: rgba(255,255,255,0.75);
+  }
+  html.dark-mode .list.layout-grid .icon-wrap img.hero.square{
+    background: rgba(0,0,0,0.25);
+  }
+  .list.layout-grid .icon-wrap img.fallback{
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(2,18,22,0.15);
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* Content area with semi-transparent background */
+  .list.layout-grid .meta{
+    flex: 1;
+    margin: 0;
+    padding: 14px 16px 50px 16px; /* extra bottom padding for actions */
+    background: rgba(var(--card-rgb, 255,255,255), 0.92);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Title: 1 line with ellipsis */
+  .list.layout-grid .title{
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+
+  /* Description: fixed 3 lines height */
+  .list.layout-grid .desc{
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+    height: calc(12px * 1.4 * 3); /* 3 lines */
+    min-height: calc(12px * 1.4 * 3);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    white-space: normal !important;
+    word-break: break-word;
+  }
+
+  /* Tags in grid view */
+  .list.layout-grid .tags{
+    margin-top: 6px;
+    gap: 4px;
+  }
+  .list.layout-grid .tag{
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  /* Actions: bottom-right, larger tap target */
+  .list.layout-grid .actions{
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    flex: 0 0 auto;
+    display: flex;
+    gap: 8px;
+  }
+  .list.layout-grid .actions .open-btn,
+  .list.layout-grid .actions .small-btn{
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Dark-mode: make the small action buttons (including the 'e' edit button)
+     use a subdued translucent background instead of a bright gradient so
+     they remain readable and don't clash with card hero images. */
+  html.dark-mode .list.layout-grid .actions .open-btn,
+  html.dark-mode .list.layout-grid .actions .small-btn{
+    background: rgba(255,255,255,0.04) !important;
+    color: var(--text) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    box-shadow: none !important;
+  }
+  /* Dark-mode adjustments for grid cards (ensure borders/shadows remain dark-mode appropriate) */
+  html.dark-mode .list.layout-grid .row{
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 6px 18px rgba(2,8,10,0.55);
+  }
+}
+
+.row{display:flex;align-items:center;height:var(--row-h);gap:0;padding:8px 6px;border-radius:12px;background:linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));border:1px solid rgba(6,50,58,0.04);box-shadow:0 2px 8px rgba(2,18,22,0.04)}
+.row:hover{box-shadow:0 8px 24px rgba(6,50,58,0.08)}
+/* prevent selection from changing layout: ensure selected rows don't alter size */
+.row.selected{transform:none !important; box-sizing:border-box;}
+
+/* Edit-mode specific: avoid hover/transform effects and keep actions width fixed so grid doesn't reflow */
+body.edit-mode .row{transform:none !important;transition:none !important;}
+body.edit-mode .row:hover{box-shadow:0 4px 10px rgba(6,50,58,0.06)}
+body.edit-mode .actions{min-width:auto;flex:0 0 auto}
+/* ensure action buttons don't expand the card when toggled */
+body.edit-mode .actions .small-btn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.icon-wrap{flex:0 0 56px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));font-weight:700;color:#ffffff;margin-right:4px}
+.icon-wrap img{width:44px;height:44px;border-radius:8px;object-fit:cover}
+.meta{flex:1 1 auto;min-width:0;margin-right:0}
+.title{font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);padding-right:0}
+.desc{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:0}
+.tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{background:#eafffb;padding:4px 8px;border-radius:999px;font-size:12px;color:var(--text);border:1px solid rgba(6,50,58,0.06);font-weight:700}
+
+/* Actions area: compact layout for minimal footprint */
+.actions{flex:0 0 44px;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-left:0;height:44px}
+/* If actions container is empty (non-owner), hide it so title can use full width */
+.actions:empty{display:none}
+
+/* Actions buttons: restore flexible sizing (no forced height) */
+.actions button,
+.actions .open-btn,
+.actions .small-btn{
+  box-sizing:border-box;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  line-height:1;
+  border-radius:6px;
+  height:100%;
+  padding:0 8px;
+}
+
+/* Provide slightly larger visual for primary open button while keeping compact footprint */
+.actions .open-btn{gap:4px;padding:0 10px;height:100%}
+.actions .open-btn:active{transform:translateY(1px)}
+
+/* Primary action button (編集ボタン・モーダル内保存ボタン) */
+.open-btn{
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid rgba(6,50,58,0.08);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(2,18,22,0.06);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+.open-btn:hover{ transform: translateY(-1px); opacity: 0.97; }
+/* Ensure modal primary button looks the same and is clearly visible */
+.modal .open-btn{ background: var(--card); color: var(--text); border: 1px solid rgba(6,50,58,0.08); }
+/* Keep dark-mode appearance consistent and ensure focus visibility
+   For list-row action buttons (the small 'e' edit button) use a faint
+   translucent surface so the button stands out against the card. */
+html.dark-mode .open-btn,
+html.dark-mode .actions .open-btn,
+html.dark-mode .row .actions .open-btn{
+  background: rgba(255,255,255,0.04) !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+}
+.open-btn:focus{ outline: 3px solid rgba(255,255,255,0.12); outline-offset: 2px; }
+.modal .open-btn:focus{ outline: 3px solid rgba(255,255,255,0.12); outline-offset: 2px; }
+
+/* Small buttons (secondary) */
+.actions .small-btn{padding:4px 8px}
+
+/* Override edit-mode fixed width to avoid forcing extra space */
+body.edit-mode .actions{min-width:auto !important;flex:0 0 auto !important}
+/* Tag button: distinct color to stand out from other buttons */
+.tag-btn{padding:6px 14px;border-radius:8px;background:linear-gradient(90deg,#ffd7a8,#ffb199);color:#0b2b2a;border:none;cursor:pointer;font-weight:800;font-size:13px;box-shadow:0 3px 10px rgba(6,50,58,0.08);transition:transform 0.12s ease, box-shadow 0.12s ease}
+.tag-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(6,50,58,0.12)}
+
+.fab{
+  /* default: bottom-right placement to avoid conflicting top/bottom rules */
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 240;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 28px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(6,50,58,0.12);
+  cursor: pointer;
+}
+.fab:active{transform:translateY(2px)}
+
+/* Owner-visible FAB: bottom-right, safe-area aware and high z-index so it's always tappable */
+.fab.owner-visible{
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  top: auto;
+  display:flex !important;
+  z-index:3000 !important;
+}
+
+/* (削除済) 旧・編集モードのフローティングボタンは廃止 */
+
+/* action buttons visibility in edit mode */
+.actions{display:flex;justify-content:flex-end;gap:4px;flex:0 0 44px;height:44px}
+.small-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(6,50,58,0.08);background:var(--card);color:var(--text);cursor:pointer;font-weight:700;display:none}
+body.edit-mode .small-btn{display:inline-block}
+/* Modal buttons should always be visible regardless of edit-mode */
+.modal .small-btn{display:inline-block}
+/* Quick tag buttons in add/edit modal */
+.quick-tag-btn{
+  font-size:12px !important;
+  padding:5px 10px !important;
+  border-radius:16px !important;
+  background:var(--card) !important;
+  border:1px solid var(--accent-2) !important;
+  color:var(--text) !important;
+  transition:all 0.15s ease;
+}
+.quick-tag-btn:hover{
+  background:var(--accent-2) !important;
+  color:#fff !important;
+}
+.quick-tag-btn.active{
+  background:var(--accent-1) !important;
+  color:#fff !important;
+  border-color:var(--accent-1) !important;
+}
+/* hide only the per-row open button in edit mode (keep modal open/save buttons visible) */
+body.edit-mode .row .open-btn{display:none}
+/* top header buttons active state */
+.top-buttons .top-btn.active{background:linear-gradient(90deg,#ff6b6b,#ff8787);color:#ffffff;border-color:transparent}
+
+/* top header buttons (always visible) */
+.top-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(6,50,58,0.08);background:var(--card);color:var(--text);cursor:pointer;font-weight:700}
+
+/* header toggle (show on all sizes; on mobile it becomes absolute) */
+.header-toggle{display:inline-flex;margin-right:8px;background:transparent;border:1px solid rgba(6,50,58,0.06);padding:6px 8px;border-radius:8px;font-size:18px;align-items:center;justify-content:center;position:relative}
+/* 表示サイズ選択メニュー */
+ .view-mode-menu{position:absolute;top:48px;left:0;z-index:1020;background:var(--card);border:1px solid rgba(6,50,58,0.08);border-radius:10px;padding:10px;box-shadow:0 8px 24px rgba(2,18,22,0.12);min-width:140px}
+ /* When wrapped inside the header hamburger, anchor menu to the toggle button
+   so it appears inside the header instead of overlapping it. */
+ #viewToggleWrap .view-mode-menu{top:calc(100% + 6px);left:0}
+.view-mode-menu .menu-title{font-weight:700;font-size:13px;color:var(--text);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(6,50,58,0.06)}
+.view-mode-menu .menu-radio{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:14px;color:var(--text);transition:background 0.2s}
+.view-mode-menu .menu-radio:hover{background:rgba(6,50,58,0.04)}
+.view-mode-menu .menu-radio input[type="radio"]{cursor:pointer}
+.view-mode-menu .menu-radio input[type="radio"]:checked + span{font-weight:700;color:var(--accent-1)}
+
+/* 表示モード: small（最小） — コンパクト化: 行高・余白を縮めてより多く表示 */
+.list--small .row{height:auto;min-height:32px;padding:4px 6px;gap:6px}
+.list--small .icon-wrap{flex:0 0 24px;height:24px;border-radius:4px}
+.list--small .icon-wrap img{width:20px;height:20px;border-radius:4px}
+.list--small .meta{flex:1;min-width:0}
+.list--small .title{font-size:13px;font-weight:700}
+.list--small .desc, .list--small .tags{display:none} /* 説明とタグを非表示 */
+.list--small .actions{flex:0 0 44px;height:24px}
+
+/* medium list: match icon-wrap (40px) */
+.list--medium .actions{flex:0 0 36px;height:36px}
+/* 小表示で編集ボタンをよりコンパクトにする（行の高さ増加を防止） */
+.list--small .open-btn{padding:6px 8px;font-size:12px;border-radius:6px}
+.list--small .open-btn span{display:none}
+
+/* 表示モード: medium（既存：デフォルト）— 余白を削減してより多く表示 */
+.list--medium .row{height:auto;min-height:48px;padding:6px 8px;gap:8px}
+.list--medium .icon-wrap{flex:0 0 40px;height:40px;border-radius:6px}
+.list--medium .icon-wrap img{width:32px;height:32px;border-radius:6px}
+.list--medium .title{font-size:14px}
+.list--medium .desc{font-size:12px;margin-top:2px}
+.list--medium .tags{margin-top:3px;gap:4px}
+.list--medium .tag{padding:2px 6px;font-size:11px}
+.list--medium .open-btn{padding:6px 10px;font-size:13px}
+
+@media(max-width:560px){
+  .header-toggle{display:inline-flex}
+  /* keep hamburger inline within the top-row on small screens to avoid overlapping mid-row */
+  .header-toggle{width:36px;height:36px;padding:4px;border-radius:8px}
+  /* collapsed by default on mobile - keep search visible while hiding other controls */
+  header.card .headerInner{display:block}
+  /* when collapsed, hide mid and bottom rows to simulate closed header */
+  header.card.collapsed .mid-row,
+  header.card.collapsed .bottom-row { display: none; }
+  /* keep top-row visible */
+  header.card.collapsed .top-row { display: flex; }
+}
+@media(min-width:561px){
+  header.card.collapsed .headerInner{display:block}
+}
+
+/* On desktop, hide the old mid-row view-mode and sort controls (now available via hamburger menu) */
+@media(min-width:881px){
+  .mid-row .selector{display:none}
+}
+
+/* modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1100}
+/* ensure modal small buttons are visible regardless of edit-mode */
+.modal .small-btn{display:inline-block}
+.modal .panel{
+  background: linear-gradient(180deg,var(--card),rgba(var(--card-rgb),0.96));
+  padding: 18px;
+  border-radius: 12px;
+  max-width: 720px;
+  width: 92%;
+  box-shadow: 0 10px 40px rgba(2,12,20,0.4);
+  border: 1px solid rgba(6,50,58,0.04);
+  max-height: calc(90vh - 12px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* panel itself scrolls */
+  -webkit-overflow-scrolling: touch;
+}
+.modal, .modal .panel {
+  /* Allow vertical pan, prevent horizontal gestures while modal is active */
+  touch-action: pan-y;
+  -ms-touch-action: pan-y;
+}
+
+/* Prevent horizontal drift when vertically scrolling inside modals.
+   Allow horizontal scrolling only for known horizontal containers (chips/tags). */
+.modal .panel{
+  overflow-x: hidden; /* avoid accidental horizontal content shift */
+}
+.modal .panel .chip-container,
+.modal .panel .tags,
+.modal .panel .tagbar{
+  /* these are intentionally horizontal scroll lists; allow pan-x */
+  touch-action: pan-x;
+  -ms-touch-action: pan-x;
+}
+.modal .panel > :last-child{
+  position: sticky;
+  bottom: 0;
+  z-index: 6;
+  background: linear-gradient(180deg, rgba(var(--card-rgb),0.02), var(--card));
+  padding-top: 10px;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+  margin: 0 -18px -18px;
+  border-top: 1px solid rgba(6,50,58,0.04);
+}
+.modal .panel h3{margin:0 0 8px 0;color:var(--text)}
+.form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.form-row input, .form-row textarea{padding:10px;border-radius:8px;border:1px solid rgba(6,50,58,0.08);background:var(--card);color:var(--text);box-shadow: inset 0 1px 0 rgba(2,12,14,0.02)}
+.form-row input::placeholder, .form-row textarea::placeholder{color:#9fb5b7}
+.form-row label{color:var(--text);font-weight:700}
+.form-inline{display:flex;gap:8px;align-items:center}
+/* layout for label + action on same row */
+.label-row label{font-weight:700}
+.label-row .small-btn{flex-shrink:0}
+/* input-with-copy: place a copy button inside the input's right edge to avoid wrapping on narrow screens */
+.input-with-copy{position:relative}
+.muted-note{font-size:12px;color:var(--muted)}
+
+/* tag overflow control */
+.tagbar{display:flex;gap:8px;align-items:center;flex-wrap:nowrap;overflow:hidden;margin-top:10px}
+.chip{padding:8px 10px;border-radius:999px;background:#eafffb;border:1px solid rgba(6,50,58,0.06);cursor:pointer;white-space:nowrap;color:var(--text);font-weight:700;overflow:hidden;text-overflow:ellipsis;min-width:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.chip.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#ffffff;border-color:transparent;font-weight:700}
+.modal .chip{background:rgba(6,50,58,0.06);border-color:rgba(6,50,58,0.08)}
+.modal .chip.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2)) !important;color:#ffffff !important;border-color:transparent !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;font-weight:700 !important}
+.chip-container{display:flex;gap:8px;overflow:hidden;min-width:0}
+.more-btn{padding:8px 10px;border-radius:999px;background:#eafffb;border:1px solid rgba(6,50,58,0.06);cursor:pointer;color:var(--text);font-weight:700}
+
+/* ユーザー情報行（ヘッダー内） */
+.user-info-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:8px;
+  background:rgba(6,50,58,0.04);
+  transition:background 0.2s;
+  white-space:nowrap;
+}
+.user-info-row:hover{background:rgba(6,50,58,0.08)}
+.user-mini-avatar{
+  width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;overflow:hidden;flex-shrink:0;
+}
+.user-mini-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.user-info-text{font-size:13px;color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+@media(max-width:560px){.user-info-text{max-width:120px}}
+
+/* Top-row specifics: show icon only, prevent wrapping */
+.top-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;padding:4px 8px}
+.top-row .user-info-text{display:none}
+.top-row .user-mini-avatar{width:36px;height:36px}
+#authRight{margin-left:auto;flex-shrink:0}
+.top-row .search{flex:1;min-width:0;margin:0}
+
+
+
+/* Keep the count/actions row visible while scrolling */
+  /* make count row sticky and reduce horizontal padding to save space
+    top will be set dynamically to the header height via --hdr-h */
+  #count{position:sticky;top:var(--hdr-h,0px);z-index:995;padding:8px 0;margin:0 !important}
+  /* Slight gray translucent background, single-line layout */
+  #count .count-row{
+    background: rgba(230,235,237,0.55); /* soft gray translucency */
+    padding:8px 12px;
+    border-radius:6px;
+    box-shadow: none;
+    border: 1px solid rgba(6,50,58,0.04);
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  
+  /* Custom select styling */
+  #viewSizeSelect, #sortSelect{
+    padding:6px 28px 6px 10px;
+    border-radius:8px;
+    border:1px solid rgba(6,50,58,0.1);
+    background:linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));
+    color:var(--text);
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 2px 6px rgba(6,50,58,0.04);
+    transition:all 0.2s ease;
+    appearance:none;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%2306323a" d="M6 8L2 4h8z"/></svg>');
+    background-repeat:no-repeat;
+    background-position:right 8px center;
+  }
+  #viewSizeSelect:hover, #sortSelect:hover{
+    border-color:rgba(6,50,58,0.15);
+    box-shadow:0 4px 12px rgba(6,50,58,0.08);
+  }
+  #viewSizeSelect:focus, #sortSelect:focus{
+    outline:2px solid var(--accent-1);
+    outline-offset:2px;
+    border-color:var(--accent-1);
+  }
+  
+  /* Count text styling */
+  #countText{
+    font-size:14px;
+    font-weight:600;
+    color:var(--text);
+    padding:4px 8px;
+  }
+
+/* --- Safe area: ensure bottom UI (iOS home indicator / browser bar) doesn't hide list items --- */
+/* add extra bottom padding to main scrollable areas and account for rows so last item is visible */
+.wrap, main, .list{
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+}
+.list{
+  padding-bottom: calc(var(--row-h,72px) + 24px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Ensure header stays on top when fixed and content spacing uses --hdr-h */
+header.card{z-index:1100}
+.wrap{box-sizing:border-box;padding-top:calc(var(--hdr-h,72px) + 16px)}
+
+  /* ユーザー設定モーダル */
+  .user-avatar-large{
+    width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#fff;margin:0 auto;overflow:hidden;
+  }
+  .user-avatar-large img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+  /* small screens tweaks */
+  @media(max-width:560px){
+    :root{--row-h:86px}
+    .open-btn{padding:12px 14px}
+    .icon-wrap{flex:0 0 64px;height:64px}
+    .chip {padding:8px}
+    header.card{padding:10px 8px}
+    /* Stack header vertically on small screens for readability */
+    header.card{flex-direction:column;align-items:stretch}
+.selector{width:100%;margin-top:8px}
+/* On narrow screens keep the view button compact and let the select fill remaining space */
+.selector{display:flex;gap:8px;align-items:center}
+.selector select{flex:1;min-width:0}
+.selector button{flex:0 0 auto}
+.search{width:100%}
+.search input{width:100%}
+/* ensure proper stacking order (no explicit order so layout remains stable) */
+.search{order:unset}
+.selector{order:unset}
+.top-buttons{order:unset}
+    .top-buttons{display:flex;gap:8px;margin-top:8px}
+    .fab{display:none}
+    /* mobile: compact actions area (width x height = 32px x 36px) */
+    .actions{flex:0 0 32px;width:32px;min-width:32px;max-width:32px;height:36px;overflow:hidden}
+    .actions button,
+    .actions .open-btn,
+    .actions .small-btn{
+      padding:0 !important;
+      min-width:0 !important;
+      width:100% !important;
+      height:100% !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+    }
+    /* auth-ui をコンパクトに */
+    #auth-ui{flex-wrap:nowrap;}
+  }
+
+  /* Prevent iOS Safari auto-zoom on input focus by ensuring tappable inputs use at least 16px font-size */
+  @media(max-width:560px){
+    html,body{ -webkit-text-size-adjust:100%; }
+    input,select,textarea,button{ font-size:16px !important; }
+    .modal .panel input, .modal .panel textarea, .modal .panel select{ font-size:16px !important; }
+  }
+
+/* When add/edit modal is open, hide header and top UI to focus on modal */
+/* When modal is open, visually hide header/fab/sidebar but keep their layout space
+   so grid column count does not change (prevents layout shift). */
+body.modal-add-open header.card,
+body.modal-add-open .fab,
+body.modal-add-open .sidebar {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+/* Prevent body from scrolling when modal open */
+body.modal-add-open { overflow: hidden; }
+
+/* sidebar remains visible when tag/hub modal is open */
+
+/* When tag/user-settings modal is open, avoid hiding count to prevent layout shift */
+
+
+/* Cookie consent banner styles */
+#cookieBanner {
+  position:fixed;
+  left:16px;
+  right:16px;
+  bottom:18px;
+  z-index:1200;
+  background: rgba(15, 184, 191, 0.98);
+  color: #fff;
+  padding:12px 14px;
+  border-radius:12px;
+  box-shadow: 0 8px 24px rgba(2,18,22,0.12);
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  max-width:980px;
+  margin:0 auto;
+  box-sizing:border-box;
+  font-size:14px;
+}
+#cookieBanner .msg{flex:1;min-width:0; margin-right:12px; color: #02292c; font-weight:700}
+#cookieBanner .actions{display:flex;gap:8px;align-items:center;flex-shrink:0}
+#cookieBanner .cookie-btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+#cookieBanner .cookie-accept{background:#fff;color:var(--text)}
+#cookieBanner .cookie-more{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3)}
+@media(max-width:560px){
+  #cookieBanner{left:10px;right:10px;padding:10px;flex-direction:column;align-items:flex-start;gap:8px}
+  #cookieBanner .actions{align-self:stretch;justify-content:flex-end;width:100%}
+  #cookieBanner .msg{font-size:15px;font-weight:700;color:#fff}
+  #cookieBanner .cookie-accept{width:110px}
+}
+
+/* Loading overlay */
+#loadingOverlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: var(--bg-overlay, rgba(0,0,0,0.6));
+  color: var(--text);
+  z-index:2200;
+}
+.loader{display:flex;flex-direction:column;align-items:center;gap:12px}
+.spinner{
+  width:56px;height:56px;border-radius:50%;
+  border:6px solid rgba(255,255,255,0.12);
+  border-top-color: var(--accent, #00d1c1);
+  animation: spinner 1s linear infinite;
+}
+.loader-text{font-size:16px;color:var(--text);opacity:0.95}
+@keyframes spinner{to{transform:rotate(360deg)}}
+
+/* Hide overlay when JS sets display:none (no extra class needed) */
+
+/* 詳細ボタン（一般ユーザー用） */
+.detail-btn {
+  background: var(--accent-1);
+  color: #fff;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight:700;
+  min-width:32px;
+  height:auto;
+}
+.detail-btn:hover{ opacity:0.9 }
+
+
+/* 詳細値のスタイル */
+.detail-value { color: var(--text); font-size:14px; line-height:1.4 }
+.detail-value:empty::before { content: '（なし）'; color: var(--muted); }
+
+/* ========== Bottom Navigation (Mobile) ========== */
+.bottom-nav {
+  display: none; /* hidden on desktop by default */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(56px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));
+  border-top: 1px solid rgba(6,50,58,0.08);
+  box-shadow: 0 -4px 16px rgba(2,18,22,0.06);
+  z-index: 9999;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Hide header and bottom navigation while user settings modal is open */
+body.modal-settings-open header.card { display: none !important; }
+body.modal-settings-open .bottom-nav { display: none !important; }
+
+/* Normalize spacing in header top-row so tag button aligns evenly */
+.top-row{gap:8px}
+.top-row .more-btn{margin-left:0;margin-right:0}
+
+/* Hide bottom nav while add/edit modal is open (mobile focus) */
+body.modal-add-open .bottom-nav { display:none !important; }
+
+html.dark-mode .bottom-nav {
+  background: linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));
+  border-top-color: rgba(255,255,255,0.06);
+}
+
+.bottom-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  height: 100%;
+}
+
+.bottom-nav-btn:hover,
+.bottom-nav-btn:active {
+  background: rgba(15,184,191,0.1);
+  color: var(--accent-1);
+}
+
+/* Layout toggle active styling */
+.layout-toggle-btn{ background: transparent; border:1px solid rgba(0,0,0,0.06); display:inline-block; }
+.layout-toggle-btn.active{ background: linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#fff; border-color:transparent; }
+/* Ensure layout toggle is visible even though .small-btn defaults to hidden outside edit mode */
+.sidebar .layout-toggle-btn{ display:inline-block !important; }
+
+.bottom-nav-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.bottom-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Show bottom nav only on mobile (max-width 768px) */
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex !important;
+  }
+  /* Add extra padding to list to avoid overlap with bottom nav */
+  .list {
+    padding-bottom: calc(var(--row-h, 72px) + 80px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Hide bottom navigation when add/edit modal is open to avoid overlap on mobile */
+body.modal-add-open .bottom-nav {
+  display: none !important;
+}
+
+/* User-controlled hide class: ensures JS can force-hide bottom nav even on mobile */
+.bottom-nav.hidden-by-user{ display: none !important; }
+
+/* Always hide FAB since we use bottom nav on mobile */
+.fab {
+  display: none !important;
+}
+
+/* ========== Search Overlay (Mobile) ========== */
+.search-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1300;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20vh;
+}
+
+.search-overlay.open {
+  display: flex;
+}
+
+/* DEBUG: 强制表示 — テスト用。本番では削除してください */
+.bottom-nav{
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 99999 !important;
+}
+
+.search-overlay-content {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 10px 40px rgba(2,12,20,0.3);
+}
+
+html.dark-mode .search-overlay-content {
+  background: #0c2c2c;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.search-overlay-content input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(6,50,58,0.1);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+}
+
+html.dark-mode .search-overlay-content input {
+  background: #062525;
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* ========== Hub Styles ========== */
+.hub-panel {
+  max-width: 500px;
+  width: 90%;
+}
+
+.hub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.hub-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid rgba(6,50,58,0.06);
+}
+
+html.dark-mode .hub-item {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}
+
+.hub-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.hub-item-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hub-item-date {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.hub-item-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.hub-delete-btn {
+  background: transparent !important;
+  border: none !important;
+  padding: 4px 6px !important;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.hub-delete-btn:hover {
+  opacity: 1;
+}
+
+.hub-text-display {
+  background: var(--bg);
+  border: 1px solid rgba(6,50,58,0.08);
+  border-radius: var(--radius);
+  padding: 14px;
+  min-height: 60px;
+  max-height: 50vh;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+html.dark-mode .hub-text-display {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* Hide bottom nav when hub modal is open */
+body.modal-hub-open .bottom-nav { display: none !important; }
+
+/* Password masking via CSS (allows third-party keyboards like Simeji) */
+.hub-pw-masked {
+  -webkit-text-security: disc;
+  text-security: disc;
+}
+.hub-pw-masked.pw-visible {
+  -webkit-text-security: none;
+  text-security: none;
+}
