@@ -1111,16 +1111,7 @@ header.card{z-index:1100}
     .modal .panel input, .modal .panel textarea, .modal .panel select{ font-size:16px !important; }
   }
 
-/* When add/edit modal is open, hide header and top UI to focus on modal */
-/* When modal is open, visually hide header/fab/sidebar but keep their layout space
-   so grid column count does not change (prevents layout shift). */
-body.modal-add-open header.card,
-body.modal-add-open .fab,
-body.modal-add-open .sidebar {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
+/* When add/edit modal is open, focus on modal (header/sidebar remain visible) */
 /* Prevent body from scrolling when modal open */
 body.modal-add-open { overflow: hidden; }
 
@@ -1229,8 +1220,7 @@ body.modal-settings-open .bottom-nav { display: none !important; }
 .top-row{gap:8px}
 .top-row .more-btn{margin-left:0;margin-right:0}
 
-/* Hide bottom nav while add/edit modal is open (mobile focus) */
-body.modal-add-open .bottom-nav { display:none !important; }
+/* bottom nav stays visible while add/edit modal is open */
 
 html.dark-mode .bottom-nav {
   background: linear-gradient(180deg, var(--card), rgba(var(--card-rgb),0.96));
@@ -1286,10 +1276,7 @@ html.dark-mode .bottom-nav {
   }
 }
 
-/* Hide bottom navigation when add/edit modal is open to avoid overlap on mobile */
-body.modal-add-open .bottom-nav {
-  display: none !important;
-}
+/* bottom nav stays visible when add/edit modal is open */
 
 /* User-controlled hide class: ensures JS can force-hide bottom nav even on mobile */
 .bottom-nav.hidden-by-user{ display: none !important; }
