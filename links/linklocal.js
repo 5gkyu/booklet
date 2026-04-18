@@ -2423,35 +2423,15 @@ if (window.firebase) {
 /* unload 保険 */
 window.addEventListener('beforeunload', ()=>{ try{ saveBookmarksToRemote(); } catch(e){} });
 
-// Ensure bottom navigation is attached to body and visible (defensive: fixes cases
-// where CSS or containers prevent correct sizing). This is a lightweight fallback
-// for environments where fixed positioning becomes constrained.
-(function ensureBottomNavVisible(){
+// Ensure bottom navigation is attached to body so fixed positioning is stable.
+// Do not apply inline visual styles here; theme CSS must control appearance.
+(function ensureBottomNavAttached(){
   try{
     const bn = document.getElementById('bottomNav');
     if(!bn) return;
     // move to body to avoid being inside transformed/limited container
     if(bn.parentNode !== document.body) document.body.appendChild(bn);
-    const r = bn.getBoundingClientRect();
-    if(r.width === 0 || r.height === 0){
-      Object.assign(bn.style, {
-        display: 'flex',
-        position: 'fixed',
-        left: '0',
-        right: '0',
-        bottom: '0',
-        height: '56px',
-        padding: '8px 0',
-        background: '#39C5D6',
-        color: '#fff',
-        zIndex: '99999'
-      });
-      // ensure child buttons are visible
-      Array.from(bn.querySelectorAll('button')).forEach(b=>{
-        try{ b.style.display = b.style.display || 'flex'; b.style.flex = '1'; }catch(e){}
-      });
-    }
-  }catch(e){ console.warn('ensureBottomNavVisible failed', e); }
+  }catch(e){ console.warn('ensureBottomNavAttached failed', e); }
 })();
 /* ========== Bottom Navigation Handlers ========== */
 // 全モーダルを閉じるヘルパー
