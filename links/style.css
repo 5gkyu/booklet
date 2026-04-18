@@ -898,7 +898,8 @@ body.edit-mode .row .open-btn{display:none}
 }
 
 /* modal */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1100}
+.modal{position:fixed;inset:var(--hdr-h,72px) 0 0 0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1100}
+@media(min-width:881px){.modal{left:260px;}}
 /* ensure modal small buttons are visible regardless of edit-mode */
 .modal .small-btn{display:inline-block}
 .modal .panel{
@@ -1445,8 +1446,7 @@ html.dark-mode .hub-text-display {
   border-color: rgba(255,255,255,0.06);
 }
 
-/* Hide bottom nav when hub modal is open */
-body.modal-hub-open .bottom-nav { display: none !important; }
+/* bottom nav remains visible when hub modal is open */
 
 /* Password masking via CSS (allows third-party keyboards like Simeji) */
 .hub-pw-masked {
