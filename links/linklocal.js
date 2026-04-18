@@ -965,6 +965,7 @@ if(el.sortSelect){
 if(el.topOpenAdd) el.topOpenAdd.addEventListener('click', ()=>{ if(!isReadOnlyMode) openAddModal(); });
 if(el.openAdd) el.openAdd.addEventListener('click', ()=>{ if(!isReadOnlyMode) openAddModal(); });
 if(el.cancelAdd) el.cancelAdd.addEventListener('click', ()=>{ closeAddModal(); });
+if(el.addModal) el.addModal.addEventListener('click', (e)=>{ if(e.target === el.addModal) closeAddModal(); });
 if(el.deleteInModal) el.deleteInModal.addEventListener('click', ()=>{
   try{
     const eid = el.saveAdd && el.saveAdd.dataset && el.saveAdd.dataset.editId ? Number(el.saveAdd.dataset.editId) : null;
@@ -1441,6 +1442,20 @@ loadViewMode(); // 表示モードを localStorage から読み込み
 loadSort(); // ソート設定を localStorage から読み込み
 updateViewModeUI(); // ラジオボタンの状態を更新
 renderTags(); renderList();
+// ?tag= URL パラメータでタグ選択状態を起動（全ユーザー向け）
+;(function(){
+  try{
+    const _p = new URLSearchParams(window.location.search);
+    const _t = _p.get('tag');
+    if(_t){
+      state.tags.clear();
+      state.noTagFilter = false;
+      state.tags.add(decodeURIComponent(_t));
+      try{ window.history.replaceState(null, '', window.location.pathname); }catch(e){}
+      renderTags(); renderList(); renderSidebarTags();
+    }
+  }catch(e){}
+})();
 initSidebar(); // サイドバーを初期化
 
 function adjustWrapForHeader(){
