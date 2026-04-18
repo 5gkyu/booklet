@@ -898,8 +898,7 @@ body.edit-mode .row .open-btn{display:none}
 }
 
 /* modal */
-.modal{position:fixed;inset:var(--hdr-h,72px) 0 0 0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1100}
-@media(min-width:881px){.modal{left:260px;}}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:10000}
 /* ensure modal small buttons are visible regardless of edit-mode */
 .modal .small-btn{display:inline-block}
 .modal .panel{
@@ -1212,9 +1211,7 @@ body.modal-add-open { overflow: hidden; }
   align-items: center;
 }
 
-/* Hide header and bottom navigation while user settings modal is open */
-body.modal-settings-open header.card { display: none !important; }
-body.modal-settings-open .bottom-nav { display: none !important; }
+/* Settings modal: elements behind modal overlay are naturally dimmed */
 
 /* Normalize spacing in header top-row so tag button aligns evenly */
 .top-row{gap:8px}
@@ -1302,14 +1299,7 @@ html.dark-mode .bottom-nav {
   display: flex;
 }
 
-/* DEBUG: 强制表示 — テスト用。本番では削除してください */
-.bottom-nav{
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  z-index: 99999 !important;
-}
+
 
 .search-overlay-content {
   background: var(--card);
